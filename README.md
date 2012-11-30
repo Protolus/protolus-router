@@ -31,13 +31,13 @@ Regex to Function
 -----------------
 Use two functions, one to match the URL and the other to perform the action, arguments may be handled manually in either function. This function may also return a value for the optional parse callback.
 
-    router.addRoute(\(users)/([A-Za-z][A-Za-z0-9]{3,16})/([0-9]+)\i, function(user, id, postId){
+    router.addRoute(/(users)\/([A-Za-z][A-Za-z0-9]{3,16})\/([0-9]+)/, function(user, id, postId){
         //serve or return
     });
 
     or, if I had set argumentNames = ['user', 'id', 'postId'];
     
-    router.addRoute(\(users)/([A-Za-z][A-Za-z0-9]{3,16})/([0-9]+)\i, function(args){
+    router.addRoute(/(users)\/([A-Za-z][A-Za-z0-9]{3,16})\/([0-9]+)/, function(args){
         // args = {user:'', id:'', postId:''}
         //serve or return
     });
@@ -61,6 +61,25 @@ This will **always** require the callback to be used on the routed function, whi
     router.route(url, function(routedURL){
         //do stuff here
     });
+
+Groups
+------
+
+Routing rules also support 'groups' which are arbitrary assignments, which give some context to the rule
+
+If I were to route this way:
+
+    router.addRoute(/(users)\/([A-Za-z][A-Za-z0-9]{3,16})\/([0-9]+)/, ['get', 'post'], function(user, id, postId){
+        //serve or return
+    });
+    
+because I wanted to mark it to only be active on a get or post request I would then access the route:
+
+    router.route(url, 'get', function(routedURL){
+        //do stuff here
+    });
+    
+Keep in mind this is a purely textual feature and your app will need to set these values to make it work
     
 You can mix modes at will.
     
