@@ -19,9 +19,9 @@ describe('ProtolusRouter', function(){
             var router = new ProtolusRouter();
             router.addRoute(function(url){
                 return url == '';
-            }, function(){
+            }, 'test', function(){
                 return 'index';
-            }, 'test');
+            });
             router.route('', 'test', function(routed){
                 should.equal('index', routed);
             });
@@ -35,9 +35,9 @@ describe('ProtolusRouter', function(){
             });
             router.addRoute(function(url){
                 return url == '';
-            }, function(){
+            }, 'test', function(){
                 return 'index';
-            }, 'test');
+            });
             router.route('', 'blah', function(routed){
                 should.fail('This route should not occur', arguments);
             });
@@ -107,6 +107,27 @@ describe('ProtolusRouter', function(){
             });
             router.route('users/khrome/42');
             should.equal('users.js?handle=khrome&id=42', result);
+        });
+    });
+    
+    describe('INI(fileName) , route(url, callback)', function(){
+        var router = new ProtolusRouter().INI('test.ini');
+        it('Routed URL is correct', function(){
+            router.route('users/khrome', function(routed){
+                should.equal('profile?username=khrome', routed);
+            });
+        });
+        
+        it('Routed URL is incorrect without group', function(){
+            router.route('users/khrome/upload', function(routed){
+                should.fail('should not route url without correct group');
+            });
+        });
+        
+        it('Routed URL is correct with group', function(){
+            router.route('users/khrome/upload', 'post', function(routed){
+                should.equal('dropbox?username=khrome', routed);
+            });
         });
     });
 });

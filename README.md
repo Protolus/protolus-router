@@ -13,7 +13,8 @@ Options are:
 
 1. **argumentNames** : an array of strings to be used as keys when using the regex to function mode
 2. **onMissing** : a callback for when no route is found
-3. **ini** preload a particular INI file
+3. **ini** : preload a particular INI file
+3. **simpleSelectors** : set this to false to prevent the simpleSelector and instead treat the stings as complete regex selectors
 
 Function to Function
 --------------------
@@ -61,6 +62,10 @@ This will **always** require the callback to be used on the routed function, whi
     router.route(url, function(routedURL){
         //do stuff here
     });
+    
+This style may also be added directly as a route:
+
+    router.addRoute('articles/*/#', 'articles?name=*&page=*');
 
 Groups
 ------

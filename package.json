@@ -22,7 +22,8 @@
         "url": "git://github.com/Protolus/protolus-router.git"
     },
     "dependencies": {
-        "prime": "*"
+        "prime": "*",
+        "Classy":"*"
     },
     "devDependencies": {
         "mocha": "*",
