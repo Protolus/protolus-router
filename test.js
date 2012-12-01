@@ -1,4 +1,4 @@
-var assert = require("assert");
+var should = require("should");
 describe('ProtolusRouter', function(){
     var ProtolusRouter = require('protolus-router');
     
@@ -11,7 +11,7 @@ describe('ProtolusRouter', function(){
                 return 'index';
             });
             router.route('', function(routed){
-                assert.equal('index', routed);
+                should.equal('index', routed);
             });
         });
         
@@ -23,14 +23,14 @@ describe('ProtolusRouter', function(){
                 return 'index';
             }, 'test');
             router.route('', 'test', function(routed){
-                assert.equal('index', routed);
+                should.equal('index', routed);
             });
         });
         
         it('Routed URL is incorrect without group', function(){
             var router = new ProtolusRouter({
                 onMissing : function(){
-                    assert.equal(true, true);
+                    should.equal(true, true);
                 }
             });
             router.addRoute(function(url){
@@ -39,7 +39,7 @@ describe('ProtolusRouter', function(){
                 return 'index';
             }, 'test');
             router.route('', 'blah', function(routed){
-                assert.equal(true, false);
+                should.fail('This route should not occur', arguments);
             });
         });
     });
@@ -47,14 +47,14 @@ describe('ProtolusRouter', function(){
     describe('addRoute(testFunction, actionFunction) , route(url)', function(){
         it('Routed URL is correct', function(){
             var router = new ProtolusRouter();
-            var result;
+            var a = {};
             router.addRoute(function(url){
                 return url == '';
             }, function(){
-                result = 'index';
+                a.result = 'index';
             });
             router.route('');
-            assert.equal('index', result);
+            should.equal('index', a.result);
         });
     });
     
@@ -62,12 +62,12 @@ describe('ProtolusRouter', function(){
         it('Routed URL is correct', function(){
             var router = new ProtolusRouter();
             router.addRoute( /(users)\/([A-Za-z][A-Za-z0-9]{3,16})\/([0-9]+)/i , function(){
-                return arguments;
+                return Array.prototype.slice.call(arguments, 0);;
             });
-            router.route('users/khrome/42', function(args){
-                assert.equal(args[0], 'users');
-                assert.equal(args[1], 'khrome');
-                assert.equal(args[2], '42');
+            router.route('users/khrome/42', function(a, b, c){
+                should.equal(a, 'users');
+                should.equal(b, 'khrome');
+                should.equal(c, '42');
             });
         });
         
@@ -79,9 +79,9 @@ describe('ProtolusRouter', function(){
                 return args;
             });
             router.route('users/khrome/42', function(args){
-                assert.equal(args.type, 'users');
-                assert.equal(args.handle, 'khrome');
-                assert.equal(args.id, '42');
+                should.equal(args.type, 'users');
+                should.equal(args.handle, 'khrome');
+                should.equal(args.id, '42');
             });
         });
     });
@@ -94,7 +94,7 @@ describe('ProtolusRouter', function(){
                 result = type+'.js?handle='+handle+'&id='+id;
             });
             router.route('users/khrome/42');
-            assert.equal('index', result);
+            should.equal('users.js?handle=khrome&id=42', result);
         });
         
         it('Routed URL is correct with names', function(){
@@ -106,7 +106,7 @@ describe('ProtolusRouter', function(){
                 result = args.type+'.js?handle='+args.handle+'&id='+args.id;
             });
             router.route('users/khrome/42');
-            assert.equal('index', result);
+            should.equal('users.js?handle=khrome&id=42', result);
         });
     });
 });

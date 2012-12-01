@@ -25,6 +25,8 @@
         "prime": "*"
     },
     "devDependencies": {
+        "mocha": "*",
+        "should": "*"
     },
     "optionalDependencies": {},
     "engines": {
