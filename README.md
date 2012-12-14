@@ -1,7 +1,7 @@
 protolus-router.js
 ===========
 
-a lightweight URL router supporting a wide variety of usage patterns.
+A lightweight URL router for Node.js supporting a wide variety of usage patterns.
 
 Creation
 --------
@@ -14,7 +14,8 @@ Options are:
 1. **argumentNames** : an array of strings to be used as keys when using the regex to function mode
 2. **onMissing** : a callback for when no route is found
 3. **ini** : preload a particular INI file
-3. **simpleSelectors** : set this to false to prevent the simpleSelector and instead treat the stings as complete regex selectors
+4. **passthru** : if no match is found, pass the original URL
+5. **simpleSelectors** : set this to false to prevent the simpleSelector and instead treat the strings as complete regex selectors
 
 Function to Function
 --------------------

@@ -1,8 +1,8 @@
 {
     "name": "protolus-router",
     "homepage": "https://github.com/Protolus/protolus-router",
-    "version": "0.0.1-alpha",
-    "main": "./node_modules/protolus-router.js",
+    "version": "0.0.2-alpha",
+    "main": "./protolus-router.js",
     "description": "a lightweight URL router supporting a wide variety of usage patterns",
     "keywords": [
         "url",

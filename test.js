@@ -1,6 +1,6 @@
 var should = require("should");
 describe('ProtolusRouter', function(){
-    var ProtolusRouter = require('protolus-router');
+    var ProtolusRouter = require('./protolus-router');
     
     describe('addRoute(testFunction, calculateFunction) , route(url, callback)', function(){
         it('Routed URL is correct', function(){

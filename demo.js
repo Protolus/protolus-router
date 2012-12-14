@@ -1,4 +1,4 @@
-var ProtolusRouter = require('protolus-router');
+var ProtolusRouter = require('./protolus-router');
 var should = require('should');
 var router = new ProtolusRouter({
     //argumentNames : ['type', 'handle', 'id'],

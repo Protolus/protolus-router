@@ -243,7 +243,10 @@ var ProtolusRouter = Class({
                     else callback(result || url);
                 }
             }, this));
-            if(!called && this.options.onMissing) this.options.onMissing(url);
+            if(!called && this.options.passthru && callback) callback(url); 
+            if(!called && this.options.onMissing){
+                this.options.onMissing(url);
+            }
         }, this));
     }
 });
